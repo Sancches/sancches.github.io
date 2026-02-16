@@ -121,7 +121,7 @@ h2 {
     color: var(--text-color);
 }
 
-.nav-link::after {
+.nav-link:not(.contact-btn)::after {
     content: '';
     position: absolute;
     width: 0;
@@ -132,7 +132,7 @@ h2 {
     transition: var(--transition);
 }
 
-.nav-link:hover::after {
+.nav-link:not(.contact-btn):hover::after {
     width: 100%;
 }
 
@@ -152,7 +152,109 @@ h2 {
     color: var(--bg-color);
     border-color: var(--accent-color);
 }
+/* --- Mobile Menu Toggle --- */
+.project-header {
+    padding-top: 150px; /* More space for navbar */
+    padding-bottom: 50px;
+}
 
+.project-subtitle {
+    font-family: var(--font-body);
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.project-title {
+    font-size: 5rem;
+    line-height: 0.9;
+    font-family: var(--font-heading);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+/* Main Image */
+.project-visual {
+    padding-bottom: 50px;
+}
+
+.main-project-image {
+    width: 100%;
+    height: 60vh; /* Takes up 60% of viewport height */
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 1px solid #333;
+}
+
+/* Content Grid (Description vs Tools) */
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Text takes 2/3, Tools take 1/3 */
+    gap: 80px;
+}
+
+.project-desc h3, .project-tools h3 {
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.project-desc p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.project-desc strong {
+    color: var(--accent-color);
+}
+
+/* Tools are reused from .skill-tags but positioned here */
+
+/* Gallery Grid */
+.bg-darker {
+    background-color: #050505;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}
+
+.gallery-item {
+    height: 400px;
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+    border: 1px solid #222;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.02);
+    border-color: var(--accent-color);
+}
+
+/* Back Button Area */
+.centered-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.back-btn {
+    padding: 20px 60px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 /* --- Mobile Menu Toggle --- */
 .menu-toggle {
     display: none;
@@ -587,10 +689,43 @@ footer {
         font-family: var(--font-heading);
     }
     
+    .nav-menu .contact-btn {
+        /* 1. Removemos o visual de botão */
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+
+        /* 2. Aplicamos o mesmo estilo dos outros nav-links no mobile */
+        font-size: 2.5rem; /* Ajuste para o tamanho que você definiu para os outros links */
+        font-family: var(--font-heading);
+        font-weight: 900;
+        text-transform: uppercase;
+        color: #ffffff;
+        display: block; /* Garante que ocupe a linha toda como os outros */
+        transition: var(--transition);
+    }
+
+    /* 3. Ajustamos o hover para ser igual aos outros links no mobile */
+    .nav-menu .contact-btn:hover {
+        color: var(--accent-color) !important;
+        background: transparent !important;
+    }
     .nav-link:hover { color: var(--accent-color); }
-    .nav-link::after { display: none; }
-    .contact-btn { border: none; padding: 0; }
-    .contact-btn:hover { background: transparent; }
+    .nav-link:not(.contact-btn)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+    }
+
+    .nav-link:not(.contact-btn):hover::after {
+        width: 100%;
+    }
 
     .about-grid, .contact-wrapper {
         grid-template-columns: 1fr;
