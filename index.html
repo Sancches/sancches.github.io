@@ -4,517 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eduardo Sanches | Portfólio</title>
-    
-    <script src="https://cdn.tailwindcss.com"></script>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* Custom styles */
-        body {
-            font-family: 'Space Mono', monospace;
-            background-color: #000000;
-            color: #FFFFFF;
-        }
-
-        /* Active sidebar link style */
-        .nav-link.active {
-            background-color: #333333;
-            color: #FFFFFF;
-        }
-
-        /* Blinking cursor animation */
-        .blinking-cursor {
-            font-weight: bold;
-            animation: blink 1s step-end infinite;
-            /* Default color for dark theme */
-            color: #FFFFFF; 
-        }
-
-        @keyframes blink {
-            from, to {
-                color: transparent;
-            }
-            50% {
-                color: currentColor; /* Use currentColor to inherit text color */
-            }
-        }
-
-        /* Smooth transitions for hover and mobile menu */
-        .nav-link, #mobile-menu, .form-input, .gallery-item, button {
-            transition: all 0.3s ease-in-out;
-        }
-
-        /* Content sections */
-        .content-section {
-            display: none; /* Hidden by default */
-        }
-        .content-section.active {
-            display: flex; /* Shown when active */
-        }
-        
-        /* Style for form inputs */
-        .form-input {
-            background-color: #1a1a1a;
-            border: 1px solid #444;
-            color: #FFFFFF;
-        }
-        .form-input:focus {
-            outline: none;
-            border-color: #FFFFFF;
-        }
-
-        /* Fixed padding for main content on larger screens (kept this from previous request) */
-        @media (min-width: 1024px) { /* Apply from lg breakpoint upwards */
-            #main-content > section { /* Target individual content sections */
-                max-width: 1000px; /* Margins were reduced here */
-                margin-left: auto;
-                margin-right: auto;
-            }
-        }
-
-        /* Light Theme Styles (Default is Dark) */
-        body.light-theme {
-            background-color: #FFFFFF;
-            color: #000000;
-        }
-
-        .light-theme .bg-black {
-            background-color: #F0F0F0; /* Lighter sidebar background */
-            border-color: #D0D0D0;
-        }
-
-        .light-theme .text-white {
-            color: #000000;
-        }
-
-        /* IMPROVED: Subtitle color for light theme */
-        .light-theme .text-gray-300 { /* Target specific subtitles */
-            color: #333333; /* Darker gray for better contrast */
-        }
-
-        .light-theme .text-gray-400 { /* General gray text */
-            color: #555555;
-        }
-
-        .light-theme .nav-link.active {
-            background-color: #CCCCCC;
-            color: #000000;
-        }
-
-        .light-theme .nav-link:hover {
-            background-color: #E0E0E0;
-        }
-        
-        .light-theme .bg-gray-900 {
-            background-color: #EEEEEE;
-        }
-
-        .light-theme .border-gray-700 {
-            border-color: #BBBBBB;
-        }
-
-        .light-theme .hover\:border-white:hover {
-            border-color: #333333;
-        }
-
-        .light-theme .hover\:bg-gray-800:hover {
-            background-color: #DDDDDD;
-        }
-
-        .light-theme .form-input {
-            background-color: #FFFFFF;
-            border-color: #BBBBBB;
-            color: #000000;
-        }
-
-        .light-theme .form-input:focus {
-            border-color: #555555;
-        }
-
-        .light-theme .text-gray-500 { /* For placeholder text like // Imagem */
-            color: #888888;
-        }
-
-        /* Blinking cursor color for light theme */
-        .light-theme .blinking-cursor {
-            color: #000000; /* Black for light theme */
-        }
-
-        /* Toggle switch specific styles */
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
-        }
-
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #1F2937; /* Gray when off */
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white; /* White circle */
-            -webkit-transition: .4s;
-            transition: .4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #777; /* Black when on */
-        }
-
-        input:focus + .slider {
-            box-shadow: 0 0 1px #555555; /* Darker shadow */
-        }
-
-        input:checked + .slider:before {
-            -webkit-transform: translateX(26px);
-            -ms-transform: translateX(26px);
-            transform: translateX(26px);
-        }
-
-        /* Round sliders */
-        .slider.round {
-            border-radius: 34px;
-        }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-
-        /* Icons inside the slider for dark/light mode */
-        .slider-icons {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 8px;
-            color: #FFF; /* Default icon color */
-            pointer-events: none; /* Make icons not interfere with click */
-        }
-
-        .slider-icons .fa-moon,
-        .slider-icons .fa-sun {
-            font-size: 16px;
-        }
-
-        /* Adjust icon colors based on theme */
-        .light-theme .slider-icons .fa-moon {
-            color: #FFF; /* Moon icon white when light theme is active */
-        }
-        .light-theme .slider-icons .fa-sun {
-            color: #FFF; /* Sun icon grey when light theme is active */
-        }
-        body:not(.light-theme) .slider-icons .fa-sun {
-            color: #FFF; /* Sun icon white when dark theme is active */
-        }
-        body:not(.light-theme) .slider-icons .fa-moon {
-            color: #FFF; /* Moon icon grey when dark theme is active */
-        }
-
-        /* Ensure sidebar content pushes to bottom */
-        aside#mobile-menu {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Pushes content to top and bottom */
-            height: 100vh; /* Ensure it takes full viewport height for positioning */
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;600&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="antialiased">
+<body>
 
-    <div class="relative min-h-screen md:flex">
-        <div class="md:hidden flex justify-between items-center p-4 bg-black border-b border-gray-800">
-            <h1 class="text-xl font-bold">E.S.</h1>
-            <button id="hamburger-button" class="text-white focus:outline-none">
-                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#home" class="logo">EDUARDO<span class="dot">.</span></a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Início</a></li>
+                <li><a href="#about" class="nav-link">Sobre</a></li>
+                <li><a href="#skills" class="nav-link">Habilidades</a></li>
+                <li><a href="#projects" class="nav-link">Projetos</a></li>
+                <li><a href="#contact" class="contact-btn">Contato</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <aside id="mobile-menu" class="bg-black border-r border-gray-800 w-64 fixed inset-y-0 left-0 transform -translate-x-full md:fixed md:top-0 md:left-0 md:translate-x-0 z-30">
-            <div> <div class="flex items-center justify-between p-4 md:p-8">
-                    <h1 class="text-xl md:text-2xl font-bold">Portfólio</h1>
-                    <button id="close-menu-button" class="md:hidden text-white focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <nav class="flex-grow p-4 md:p-6 space-y-2">
-                    <a href="#" id="nav-home" class="nav-link active flex items-center p-3 rounded-lg hover:bg-gray-800">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                        <span class="ml-4">Início</span>
-                    </a>
-                    <a href="#" id="nav-about" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-800">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
-                        <span class="ml-4">Sobre Mim</span>
-                    </a>
-                    <a href="#" id="nav-skills" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-800">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        <span class="ml-4">Habilidades</span>
-                    </a>
-                    <a href="#" id="nav-gallery" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-800">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                        <span class="ml-4">Galeria</span>
-                    </a>
-                    <a href="#" id="nav-contact" class="nav-link flex items-center p-3 rounded-lg hover:bg-gray-800">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                        <span class="ml-4">Contato</span>
-                    </a>
-                </nav>
-            </div>
-            <div class="p-4 md:p-6 flex justify-start items-center">
-                <label class="toggle-switch">
-                    <input type="checkbox" id="theme-toggle-switch">
-                    <span class="slider round"></span>
-                    <div class="slider-icons">
-                        <i class="fas fa-sun"></i>
-                        <i class="fas fa-moon"></i>
-                    </div>
-                </label>
-                <span class="ml-3 text-sm text-gray-400" id="theme-text">Tema Escuro</span>
-            </div>
-        </aside>
-
-        <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-20"></div>
-
-        <main id="main-content" class="flex-1 p-8 md:p-12 md:ml-64 overflow-y-auto">
-            <section id="content-home" class="content-section active flex-col justify-center h-full">
-                <h2 class="text-4xl md:text-6xl lg:text-8xl font-bold">
-                    Eduardo Sanches<span class="blinking-cursor">_</span>
-                </h2>
-                <p class="mt-4 text-lg md:text-2xl text-gray-400">> Desenvolvedor, Designer & Entusiasta de Tecnologia</p>
-            </section>
-
-            <section id="content-about" class="content-section flex-col">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8">Sobre Mim</h2>
-                <h3 class="text-2xl text-gray-300 mb-4">// informações-pessoais</h3>
-                <p class="text-lg"><span class="text-gray-400">Idade:</span> 17</p>
-                <p class="text-lg"><span class="text-gray-400">Localização:</span> Nova Era - MG, Brasil</p>
-                <p class="text-lg"><span class="text-gray-400">Idiomas:</span> Português Brasileiro, Inglês</p>
-                
-                <h3 class="text-2xl text-gray-300 mb-4 mt-8">// um-pouco-mais</h3>
-                <p class="text-lg text-justify">
-                    Olá! Meu nome é Eduardo Sanches Souza e, desde cedo, fui atraído pelo universo dos computadores, com um interesse particular em jogos e seus processos de criação. Meu primeiro contato com a programação foi em LUA, onde desenvolvi jogos simples na plataforma Roblox. Ali, adquiri noções de modelagem 3D, animação e os fundamentos da programação.
-                    <br><br>
-                    Em 2025, conclui o Curso Técnico em Informática, um marco que impulsionou meu desenvolvimento. Durante esse período, aprimorei minhas habilidades em softwares como Photoshop e Illustrator, explorando meu lado designer e minha aptidão para fotografia e edição de fotos. Além disso, domino ferramentas essenciais de gestão de dados como Excel e Access, e tenho proficiência em linguagens como Python e C++.
-                    <br><br>
-                    Com essa base de conhecimentos e minha contínua vontade de aprender, estou preparado para novos desafios e para contribuir no que for necessário.
-                </p>
-            </section>
-            
-            <section id="content-skills" class="content-section flex-col">
-                <h2 class="text-4xl md:text-5xl font-bold mb-8">Habilidades</h2>
-                <h3 class="text-2xl text-gray-300 mb-4">// skillset</h3>
-                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center">
-                        <i class="fab fa-html5 mr-2"></i><i class="fab fa-css3-alt mr-2"></i><i class="fab fa-js-square mr-2"></i>HTML, CSS & JS
-                    </div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fab fa-python mr-2"></i>Python</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-file-excel mr-2"></i>Excel</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-database mr-2"></i>Access</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-paint-brush mr-2"></i>Photoshop</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-vector-square mr-2"></i>Illustrator</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-code mr-2"></i>Visual Basic</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-laptop-code mr-2"></i>C++</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-pen-nib mr-2"></i>CorelDraw</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-video mr-2"></i>Edição de Vídeo</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-bullhorn mr-2"></i>Marketing</div>
-                    <div class="bg-gray-900 border border-gray-700 p-4 rounded-lg text-center hover:border-white hover:bg-gray-800 flex items-center justify-center"><i class="fas fa-chart-line mr-2"></i>Administração</div>
-                </div>
-            </section>
-
-            <section id="content-gallery" class="content-section flex-col">
-                <div class="w-full">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-8">Galeria</h2>
-                    <div class="space-y-12">
-
-                        <div class="gallery-item flex flex-col md:flex-row gap-8 border border-gray-800 rounded-lg p-6 hover:border-white">
-                            <div class="md:w-1/3">
-                                <div class="w-full h-64 bg-gray-900 rounded-md overflow-hidden">
-                                    <img src="Galeria1.png" class="w-full h-full object-cover" alt="Vídeos promocionais ONG Na Mochila">
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="text-2xl font-bold text-white mb-2">Vídeos promocionais ONG Na Mochila</h3>
-                                <p class="text-gray-400 text-justify">
-                                    Desenvolvi dois vídeos promocionais estratégicos para a ONG Na Mochila, com o objetivo claro de financiar a participação da equipe no campeonato de robótica FIRA 2025, na Coreia do Sul. Minha campanha de mobilização resultou na arrecadação de R$ 10.000,00, além de garantir o apoio institucional da Prefeitura Municipal de Nova Era. O esforço de comunicação culminou no sucesso da equipe, que conquistou o Segundo Lugar Mundial no torneio, demonstrando o impacto direto da minha iniciativa no cenário internacional de robótica.
-                                </p>
-                            </div>
-                            
-                        </div>
-                        
-                        <div class="gallery-item flex flex-col md:flex-row gap-8 border border-gray-800 rounded-lg p-6 hover:border-white">
-                            <div class="md:w-1/3">
-                                <div class="w-full h-64 bg-gray-900 rounded-md overflow-hidden">
-                                    <img src="Galeria3.png" class="w-full h-full object-cover" alt="Identidade Visual Terceirão 2025">
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="text-2xl font-bold text-white mb-2">Identidade Visual & Fluxo de Clientes</h3>
-                                <p class="text-gray-400 text-justify">
-                                    Desenvolvi e implementei um projeto de digitalização e identidade visual para um Microempreendedor Individual (Setor Estético). Minhas entregas incluíram a Automação de Atendimento via WhatsApp, otimizando o fluxo de agendamentos e reduzindo o tempo de espera dos clientes. Também criei o Social Media Design (templates editáveis e marca d'água) para padronizar a comunicação visual no Instagram, e estruturei um Catálogo Digital interativo de serviços, facilitando a visualização de preços e portfólio para o cliente final.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="gallery-item flex flex-col md:flex-row gap-8 border border-gray-800 rounded-lg p-6 hover:border-white">
-                            <div class="md:w-1/3">
-                                <div class="w-full h-64 bg-gray-900 rounded-md overflow-hidden">
-                                    <img src="Galeria2.png" class="w-full h-full object-cover" alt="Identidade Visual Terceirão 2025">
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="text-2xl font-bold text-white mb-2">Identidade Visual Terceirão 2025</h3>
-                                <p class="text-gray-400 text-justify">
-                                    Criei esta identidade visual para minha turma do Terceiro ano do ensino médio, incluindo logotipo, paleta de cores e tipografia. O objetivo era refletir a energia e a criatividade da turma.
-                                </p>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </section>
-
-            <section id="content-contact" class="content-section flex-col">
-                <div class="w-full max-w-2xl">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-8">Entre em Contato</h2>
-                    <div class="space-y-4 text-lg">
-                        <p class="flex items-center">
-                            <i class="fas fa-envelope mr-3 text-gray-400"></i>
-                            <a href="mailto:esanches.contato@gmail.com" class="text-white hover:text-gray-400">esanches.contato@gmail.com</a>
-                        </p>
-                        <p class="flex items-center">
-                            <i class="fas fa-phone mr-3 text-gray-400"></i>
-                            <a href="tel:+5531972335287" class="text-white hover:text-gray-400">+31 97233-5287</a>
-                        </p>
-                    </div>
-                </div>
-            </section>
-        </main>
+    <section id="home" class="hero">
+    <div class="container hero-content">
+        <h1 class="hidden">CRIO <br><span class="highlight">EXPERIÊNCIAS</span> DIGITAIS</h1>
+        <p id="slogan-text" class="typewriter"></p> 
+        
+        <div class="hero-btns hidden delay-2">
+            <a href="#projects" class="btn btn-primary">Ver Projetos</a>
+            <a href="#contact" class="btn btn-outline">Contato</a>
+        </div>
     </div>
+    </section>
+        <div class="scroll-down">
+            <span>Scroll</span>
+            <i class="fas fa-arrow-down"></i>
+        </div>
+    </section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Mobile menu elements
-            const hamburgerButton = document.getElementById('hamburger-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const closeMenuButton = document.getElementById('close-menu-button');
-            const overlay = document.getElementById('overlay'); // Este elemento não será mais manipulado para o overlay
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header hidden">
+                <h2>SOBRE MIM</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text hidden">
+                    <p>Olá! Meu nome é Eduardo Sanches Souza. Sou de Nova Era - MG e, desde cedo, fui atraído pelo universo dos computadores, com um interesse particular em jogos e seus processos de criação.</p>
+                    <p>Em 2025, conclui o Curso Técnico em Informática. Durante esse período, aprimorei minhas habilidades em design e gestão de dados.</p>
+                    <p>Hoje estou matriculado no curso de Engenharia da Computação na Universidade Federal Itajubá(UNIFEI), onde continuarei minha jornada de aprendizado. Com essa base de conhecimentos e minha vontade de aprender, estou preparado para novos desafios.</p>
+                    <a href="https://drive.google.com/file/d/1U4yV1pLuFGeHvUA3DiWwWKtJXZ-eIxMK/view?usp=sharing" target="_blank" class="btn btn-outline resume-btn">
+                        <i class="fas fa-file-download" style="margin-right: 8px;"></i> Ver Currículo
+                    </a>
+                </div>
+                <div class="about-visual hidden delay-1">
+                    <div class="visual-box"><img src="SobreImagem.png" alt="Eduardo Sanches" class="about-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // Page content elements
-            const navLinks = document.querySelectorAll('.nav-link');
-            const contentSections = document.querySelectorAll('.content-section');
-            
-            // Theme toggle elements
-            const themeToggleSwitch = document.getElementById('theme-toggle-switch');
-            const themeText = document.getElementById('theme-text');
-            const body = document.body;
+    <section id="skills" class="section">
+        <div class="container">
+            <div class="section-header hidden">
+                <h2>HABILIDADES</h2>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skill-category hidden">
+                    <h3>Design & Frontend</h3>
+                    <div class="skill-tags">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JavaScript</span>
+                        <span>Photoshop</span>
+                        <span>Illustrator</span>
+                        <span>CorelDraw</span>
+                        <span>Edição de Vídeo</span>
+                    </div>
+                </div>
+                <div class="skill-category hidden delay-1">
+                    <h3>Backend & Outros</h3>
+                    <div class="skill-tags">
+                        <span>Python</span>
+                        <span>C++</span>
+                        <span>Visual Basic</span>
+                        <span>Excel</span>
+                        <span>Access</span>
+                        <span>Marketing</span>
+                        <span>Administração</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            // --- Mobile Menu Logic ---
-            function openMenu() {
-                mobileMenu.classList.remove('-translate-x-full');
-                // overlay.classList.remove('hidden'); // Removido: Não adiciona mais a classe 'hidden'
-            }
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header hidden">
+                <h2>TRABALHOS</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card hidden">
+                    <div class="card-image" style="background-image: url('Galeria4.png');"></div>
+                    <div class="card-overlay">
+                        <h3>PROJETO CRIPTOAPP</h3>
+                        <p>Criptografia • Programação</p>
+                        <a href="#" class="btn-small">Ver Detalhes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card hidden">
+                    <div class="card-image" style="background-image: url('Galeria1.png');"></div>
+                    <div class="card-overlay">
+                        <h3>Promo - ONG Na Mochila</h3>
+                        <p>Edição de Vídeo • Marketing</p>
+                        <a href="#" class="btn-small">Ver Detalhes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="project-card hidden delay-1">
+                    <div class="card-image" style="background-image: url('Galeria3.png');"></div>
+                    <div class="card-overlay">
+                        <h3>Identidade Visual & Fluxo</h3>
+                        <p>Design • Automação</p>
+                        <a href="#" class="btn-small">Ver Detalhes <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            function closeMenu() {
-                mobileMenu.classList.add('-translate-x-full');
-                // overlay.classList.add('hidden'); // Removido: Não remove mais a classe 'hidden'
-            }
+    <section id="contact" class="section bg-yellow">
+        <div class="container">
+            <div class="contact-wrapper-centered">
+                <div class="contact-info hidden">
+                    <h2>VAMOS TRABALHAR <br>JUNTOS</h2>
+                    <p class="contact-sub">Tem um projeto em mente? Entre em contato.</p>
+                    
+                    <a href="mailto:esanches.contato@gmail.com" class="email-link">esanches.contato@gmail.com</a>
+                    <a href="tel:+5531972335287" class="phone-link">+55 31 97233-5287</a>
+                    
+                    <div class="social-links-centered">
+                        <a href="https://www.linkedin.com/in/sancheseduardo/" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/Sancches" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            hamburgerButton.addEventListener('click', openMenu);
-            closeMenuButton.addEventListener('click', closeMenu);
-            // overlay.addEventListener('click', closeMenu); // Removido: O overlay não será clicável para fechar o menu, pois não aparece mais.
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Eduardo Sanches. Todos os direitos reservados.</p>
+        </div>
+    </footer>
 
-            // --- Tab Switching Logic ---
-            function switchTab(targetId) {
-                navLinks.forEach(link => {
-                    link.classList.toggle('active', link.id === `nav-${targetId}`);
-                });
-
-                contentSections.forEach(section => {
-                    section.classList.toggle('active', section.id === `content-${targetId}`);
-                });
-                
-                // Close mobile menu on tab switch
-                if (window.innerWidth < 768) {
-                    closeMenu();
-                }
-            }
-
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const targetId = this.id.split('-')[1];
-                    switchTab(targetId);
-                });
-            });
-
-            // --- Theme Toggle Logic ---
-            function applyTheme(theme) {
-                if (theme === 'light') {
-                    body.classList.add('light-theme');
-                    themeToggleSwitch.checked = true;
-                    themeText.textContent = "Tema Claro";
-                } else {
-                    body.classList.remove('light-theme');
-                    themeToggleSwitch.checked = false;
-                    themeText.textContent = "Tema Escuro";
-                }
-                localStorage.setItem('theme', theme);
-            }
-
-            // Check for saved theme preference or default to dark
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) {
-                applyTheme(savedTheme);
-            } else {
-                applyTheme('dark'); // Default to dark theme
-            }
-
-            themeToggleSwitch.addEventListener('change', () => {
-                if (themeToggleSwitch.checked) {
-                    applyTheme('light');
-                } else {
-                    applyTheme('dark');
-                }
-            });
-
-            // --- Initial State ---
-            switchTab('home');
-        });
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
