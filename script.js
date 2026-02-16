@@ -17,28 +17,21 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const sloganElement = document.getElementById('slogan-text');
-    
-    // 1. Escolhe um slogan aleatório
     const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
-    
-    // 2. Função para o efeito de digitação
+
     let i = 0;
-    const speed = 35; // Velocidade em milissegundos (menor = mais rápido)
+    const speed = 50; // Velocidade da digitação
 
     function typeWriter() {
         if (i < randomSlogan.length) {
-            sloganElement.innerHTML += randomSlogan.charAt(i);
+            // Adiciona a letra atual ao texto existente
+            sloganElement.textContent += randomSlogan.charAt(i);
             i++;
             setTimeout(typeWriter, speed);
-        } else {
-            // Remove o cursor após terminar (opcional)
-            setTimeout(() => {
-                sloganElement.classList.add('finished');
-            }, 1000);
         }
     }
 
-    // Inicia a digitação
+    // Inicia a função
     typeWriter();
 
 

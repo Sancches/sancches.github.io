@@ -197,21 +197,13 @@ h2 {
     max-width: 500px;
     min-height: 1.6em; /* Evita que o layout "pule" enquanto o texto não aparece */
     display: inline-block;
-    border-right: 2px solid var(--accent-color); /* O cursor */
-    white-space: nowrap;
+    white-space: normal;
+    word-wrap: normal;
+    display: infinite;
     overflow: hidden;
     animation: blink-cursor 0.75s step-end infinite;
 }
 
-@keyframes blink-cursor {
-    from, to { border-color: transparent; }
-    50% { border-color: var(--accent-color); }
-}
-
-/* Remova a borda quando a digitação terminar (opcional, controlado via JS) */
-.typewriter.finished {
-    border-right: none;
-}
 .btn {
     padding: 15px 40px;
     text-transform: uppercase;
@@ -527,9 +519,12 @@ footer {
 /* --- Media Queries --- */
 @media screen and (max-width: 768px) {
     h1 { 
-        font-size: 3.2rem; 
-        line-height: 1; 
-        margin-bottom: 25px; 
+        /* Usamos clamp para o texto ser fluido: 
+           mínimo 2.5rem, ideal 12% da largura da tela, máximo 4rem */
+        font-size: clamp(2.5rem, 12vw, 3.5rem) !important; 
+        line-height: 1.1;
+        width: 100%;
+        word-wrap: break-word; /* Força a quebra se necessário */
     }
     
     h2 { font-size: 3rem; }
@@ -539,9 +534,18 @@ footer {
         min-height: 100vh;
         padding: 120px 0 60px 0;
     }
+    
+    .hero-content {
+        padding: 0 15px; /* Garante uma margem de segurança nas laterais */
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Garante alinhamento à esquerda sem sair da tela */
+    }
 
     .hero-btns {
         width: 100%;
+        max-width: 100%;
         display: flex;
         flex-direction: column;
         gap: 15px;
