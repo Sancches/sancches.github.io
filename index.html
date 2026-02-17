@@ -9,6 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300;400;600&family=Montserrat:wght@900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script> 
+    <script>
+    const lenis = new Lenis();
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+    </script>
 </head>
 <body>
 
@@ -32,7 +43,7 @@
 
     <section id="home" class="hero">
     <div class="container hero-content">
-        <h1 class="hidden">CRIO <br><span class="highlight">EXPERIÊNCIAS</span> DIGITAIS</h1>
+        <h1 class="hidden">CRIANDO <br><span class="highlight">EXPERIÊNCIAS</span> DIGITAIS</h1>
         <p id="slogan-text" class="typewriter"></p> 
         
         <div class="hero-btns hidden delay-2">
@@ -56,7 +67,7 @@
                 <div class="about-text hidden">
                     <p>Olá! Meu nome é Eduardo Sanches Souza. Sou de Nova Era - MG e, desde cedo, fui atraído pelo universo dos computadores, com um interesse particular em jogos e seus processos de criação.</p>
                     <p>Em 2025, conclui o Curso Técnico em Informática. Durante esse período, aprimorei minhas habilidades em design e gestão de dados.</p>
-                    <p>Hoje estou matriculado no curso de Engenharia da Computação na Universidade Federal Itajubá(UNIFEI), onde continuarei minha jornada de aprendizado. Com essa base de conhecimentos e minha vontade de aprender, estou preparado para novos desafios.</p>
+                    <p>Hoje estou matriculado no curso de Engenharia da Computação na Universidade Federal de Itajubá (UNIFEI), onde continuarei minha jornada de aprendizado. Com essa base de conhecimentos e minha vontade de aprender, estou preparado para novos desafios.</p>
                     <a href="https://drive.google.com/file/d/1U4yV1pLuFGeHvUA3DiWwWKtJXZ-eIxMK/view?usp=sharing" target="_blank" class="btn btn-outline resume-btn">
                         <i class="fas fa-file-download" style="margin-right: 8px;"></i> Ver Currículo
                     </a>

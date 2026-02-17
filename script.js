@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // --- Typewriter Effect ---
     const slogans = [
         "Desenvolvedor, Designer & Entusiasta de Tecnologia.",
@@ -13,14 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
         "Unindo design estratégico e engenharia de software.",
         "Transformando ideias complexas em sistemas funcionais.",
         "Soluções tecnológicas que impulsionam negócios.",
-        "Você encontrou um easter-egg!"
     ];
 
     const sloganElement = document.getElementById('slogan-text');
     if (sloganElement) {
         const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
         let i = 0;
-        const speed = 50; 
+        const speed = 35;
 
         function typeWriter() {
             if (i < randomSlogan.length) {
@@ -41,11 +40,11 @@ document.addEventListener('DOMContentLoaded', () => {
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
-        
-        // This line hides the navbar background when menu is open
-        navbar.classList.toggle('menu-open'); 
 
-        if(navMenu.classList.contains('active')) {
+        // This line hides the navbar background when menu is open
+        navbar.classList.toggle('menu-open');
+
+        if (navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'auto';
