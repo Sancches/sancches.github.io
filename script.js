@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- Typewriter Effect ---
     const slogans = [
         "Desenvolvedor, Designer & Entusiasta de Tecnologia.",
         "Transformando café em código e design de impacto.",
@@ -13,37 +14,37 @@ document.addEventListener('DOMContentLoaded', () => {
         "Transformando ideias complexas em sistemas funcionais.",
         "Soluções tecnológicas que impulsionam negócios.",
         "Você encontrou um easter-egg!"
-        
     ];
 
     const sloganElement = document.getElementById('slogan-text');
-    const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
+    if (sloganElement) {
+        const randomSlogan = slogans[Math.floor(Math.random() * slogans.length)];
+        let i = 0;
+        const speed = 50; 
 
-    let i = 0;
-    const speed = 50; // Velocidade da digitação
-
-    function typeWriter() {
-        if (i < randomSlogan.length) {
-            // Adiciona a letra atual ao texto existente
-            sloganElement.textContent += randomSlogan.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
+        function typeWriter() {
+            if (i < randomSlogan.length) {
+                sloganElement.textContent += randomSlogan.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            }
         }
+        typeWriter();
     }
 
-    // Inicia a função
-    typeWriter();
-
-
-    // --- Mobile Menu Toggle ---
+    // --- Mobile Menu Toggle & Glossy Fix ---
     const menuToggle = document.querySelector('#mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const navbar = document.querySelector('.navbar'); // Select navbar
 
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
         
+        // This line hides the navbar background when menu is open
+        navbar.classList.toggle('menu-open'); 
+
         if(navMenu.classList.contains('active')) {
             document.body.style.overflow = 'hidden';
         } else {
@@ -55,20 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', () => {
             menuToggle.classList.remove('active');
             navMenu.classList.remove('active');
+            navbar.classList.remove('menu-open'); // Reset navbar
             document.body.style.overflow = 'auto';
         });
     });
 
-    // --- Navbar Background Change ---
-    const navbar = document.querySelector('.navbar');
-    
+    // --- Navbar Scroll Effect (CSS Class Toggle) ---
+    // We removed the manual style settings here to let CSS handle the Glossy effect
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
-            navbar.style.background = 'rgba(0, 0, 0, 1)';
-            navbar.style.padding = '10px 0';
+            navbar.classList.add('scrolled');
         } else {
-            navbar.style.background = 'rgba(0, 0, 0, 0.9)';
-            navbar.style.padding = '20px 0';
+            navbar.classList.remove('scrolled');
         }
     });
 
