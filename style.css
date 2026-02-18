@@ -299,7 +299,7 @@ h2 { font-size: clamp(2.5rem, 8vw, 4.5rem); line-height: 0.9; margin-bottom: 10p
 }
 
 /* Projects Grid */
-.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
 .project-card {
     position: relative; height: 450px; background: #0f0f0f; overflow: hidden;
     cursor: pointer; 
@@ -473,6 +473,10 @@ footer { padding: 60px 0; text-align: center; border-top: 1px solid rgba(255,255
     .about-grid, .project-split-layout { grid-template-columns: 1fr; }
     
     .visual-box { height: auto; aspect-ratio: 4/3; }
+    .email-link { word-break: break-all;}
+
+    .projects-grid { grid-template: 1fr !important; gap: 20px; }
+    .project-card { height: 350px; }
     .card-overlay {
         opacity: 1 !important;
         transform: translateY(0) !important;
