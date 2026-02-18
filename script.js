@@ -31,6 +31,30 @@ document.addEventListener('DOMContentLoaded', () => {
         typeWriter();
     }
 
+    const cursorGlow = document.querySelector('.cursor-glow');
+
+    document.addEventListener('mousemove', (e) => {
+        // We use requestAnimationFrame for maximum performance
+        window.requestAnimationFrame(() => {
+            cursorGlow.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+        });
+    });
+
+    const interactables = document.querySelectorAll('a, button, .project-card');
+
+    interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursorGlow.style.opacity = "0.6";
+            cursorGlow.style.width = "280px";
+            cursorGlow.style.height = "280px";
+        });
+        el.addEventListener('mouseleave', () => {
+            cursorGlow.style.opacity = "0.4";
+            cursorGlow.style.width = "200px";
+            cursorGlow.style.height = "200px";
+        });
+    });
+
     // --- Mobile Menu Toggle & Glossy Fix ---
     const menuToggle = document.querySelector('#mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
